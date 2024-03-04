@@ -34,12 +34,19 @@ export default function Card() {
   }, [length, isNumberAllowed, isSpecialAllowed, setPassword]);
 
   const copyPassword = useCallback(() => {
-    setTimeout(() => {
-      document.getElementById("btnCopy").classList.remove("bg-blue-400");
-    }, 100);
-    document.getElementById("btnCopy").classList.add("bg-blue-400");
+    const btnCopy = document.getElementById("btnCopy");
+    btnCopy.classList.toggle("bg-blue-700");
+    btnCopy.innerText = "Copied";
+
     passwordRef.current?.select();
     window.navigator.clipboard.writeText(password);
+
+    setTimeout(() => {
+      btnCopy.classList.toggle("bg-blue-700");
+      btnCopy.innerText = "Copy";
+    }, 1000);
+    // document.getElementById("btnCopy").classList.remove("bg-green-400");
+
     // document.getElementById("btnCopy").classList.remove("bg-blue-900");
   }, [password]);
 
